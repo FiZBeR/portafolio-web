@@ -41,6 +41,66 @@
   transform: scale(1.1);
 }
 
+/* Variables CSS personalizadas */
+:root {
+  /* Colores principales */
+  --primary-color: #ff6600;
+  --primary-light: #ff9933;
+  --primary-dark: #e55500;
+  
+  /* Colores de fondo */
+  --bg-color: #ffffff;
+  --bg-secondary: #fff5f0;
+  --bg-gradient: linear-gradient(135deg, var(--bg-color) 0%, var(--bg-secondary) 50%, var(--bg-color) 100%);
+  
+  /* Colores de texto */
+  --text-primary: #2d3748;
+  --text-secondary: #4a5568;
+  
+  /* Colores de partículas y efectos */
+  --particle-color: rgba(255, 102, 0, 0.6);
+  
+  /* Colores de glassmorphism */
+  --glass-bg: rgba(255, 255, 255, 0.9);
+  --glass-bg-hover: rgba(255, 255, 255, 0.95);
+  --glass-bg-expanded: rgba(255, 255, 255, 0.95);
+  --glass-bg-expanded-hover: rgba(255, 255, 255, 0.98);
+  --glass-border: rgba(255, 102, 0, 0.2);
+  
+  /* Colores de sombras */
+  --shadow-primary: rgba(255, 102, 0, 0.1);
+  --shadow-primary-hover: rgba(255, 102, 0, 0.2);
+  --shadow-primary-strong: rgba(255, 102, 0, 0.3);
+  --shadow-primary-intense: rgba(255, 102, 0, 0.4);
+  
+  /* Colores de gradientes */
+  --gradient-primary: linear-gradient(45deg, var(--primary-color), var(--primary-light));
+  --gradient-glow: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  --gradient-overlay: linear-gradient(45deg, rgba(255, 102, 0, 0.05), rgba(255, 153, 51, 0.05));
+  
+  /* Colores de tarjetas y elementos */
+  --card-bg: rgba(255, 255, 255, 0.8);
+  --card-bg-hover: rgba(255, 255, 255, 0.8);
+  --card-bg-secondary: rgba(255, 255, 255, 0.6);
+  --card-border: rgba(255, 102, 0, 0.2);
+  
+  /* Colores de elementos interactivos */
+  --tag-bg: rgba(255, 102, 0, 0.1);
+  --tag-border: rgba(255, 102, 0, 0.3);
+  
+  /* Colores de footer */
+  --footer-bg: rgba(255, 102, 0, 0.1);
+  --footer-border: rgba(255, 102, 0, 0.2);
+  
+  /* Colores para timeline */
+  --timeline-bg: rgba(255, 255, 255, 0.05);
+  --timeline-border: rgba(255, 255, 255, 0.1);
+  --timeline-skill-bg: rgba(255, 107, 53, 0.2);
+  
+  /* Colores para modal */
+  --modal-overlay: rgba(0, 0, 0, 0.8);
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -49,8 +109,8 @@
 
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  background: linear-gradient(135deg, #ffffff 0%, #fff5f0 50%, #ffffff 100%);
-  color: #2d3748;
+  background: var(--bg-gradient);
+  color: var(--text-primary);
   overflow-x: hidden;
   line-height: 1.6;
 }
@@ -70,7 +130,7 @@ body {
   position: absolute;
   width: 4px;
   height: 4px;
-  background: rgba(255, 102, 0, 0.6);
+  background: var(--particle-color);
   border-radius: 50%;
   animation: float 6s ease-in-out infinite;
 }
@@ -86,20 +146,88 @@ header {
   top: 20px;
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(255, 255, 255, 0.9);
+  background: var(--glass-bg);
   backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 102, 0, 0.2);
+  border: 1px solid var(--glass-border);
   border-radius: 50px;
   padding: 15px 30px;
   z-index: 1000;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 20px rgba(255, 102, 0, 0.1);
+  box-shadow: 0 4px 20px var(--shadow-primary);
 }
 
 header:hover {
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--glass-bg-hover);
   transform: translateX(-50%) translateY(-2px);
-  box-shadow: 0 10px 30px rgba(255, 102, 0, 0.2);
+  box-shadow: 0 10px 30px var(--shadow-primary-hover);
+}
+
+/* Estilos adicionales para el header dinámico */
+
+/* Título en el header - inicialmente oculto y sin espacio */
+.header-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-right: 0;
+  width: 0;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
+}
+
+/* Header expandido - solo cuando tiene la clase */
+header.expanded {
+  padding: 20px 40px;
+  border-radius: 30px;
+  background: var(--glass-bg-expanded);
+  box-shadow: 0 8px 32px rgba(255, 102, 0, 0.15);
+}
+
+/* Título visible cuando el header está expandido */
+header.expanded .header-title {
+  margin-right: 40px;
+  width: auto;
+}
+
+/* Ajustar el nav cuando está expandido */
+header.expanded nav {
+  align-items: center;
+}
+
+/* Animación suave para todos los cambios */
+header, .header-title {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Efecto hover mejorado para el header expandido */
+header.expanded:hover {
+  background: var(--glass-bg-expanded-hover);
+  transform: translateX(-50%) translateY(-3px);
+  box-shadow: 0 12px 40px var(--shadow-primary-hover);
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .header-title {
+    font-size: 1.2rem;
+    margin-right: 20px;
+  }
+  
+  header.expanded {
+    padding: 15px 25px;
+  }
+  
+  nav {
+    gap: 15px;
+  }
+  
+  nav a {
+    font-size: 0.9rem;
+  }
 }
 
 nav {
@@ -108,7 +236,7 @@ nav {
 }
 
 nav a {
-  color: #2d3748;
+  color: var(--text-primary);
   text-decoration: none;
   font-weight: 500;
   transition: all 0.3s ease;
@@ -116,7 +244,7 @@ nav a {
 }
 
 nav a:hover {
-  color: #ff6600;
+  color: var(--primary-color);
   transform: translateY(-2px);
 }
 
@@ -127,27 +255,13 @@ nav a::after {
   left: 0;
   width: 0;
   height: 2px;
-  background: #ff6600;
+  background: var(--primary-color);
   transition: width 0.3s ease;
 }
 
 nav a:hover::after {
   width: 100%;
 }
-
-/* .nav-brand {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: var(--primary-color);
-    opacity: 0;
-    transform: translateX(-50px);
-    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
-
-.nav-brand.visible {
-    opacity: 1;
-    transform: translateX(0);
-} */
 
 /* Sección principal */
 .hero {
@@ -185,34 +299,34 @@ nav a:hover::after {
   height: 350px;
   border-radius: 50%;
   object-fit: cover;
-  border: 5px solid #ff6600;
-  box-shadow: 0 20px 40px rgba(255, 102, 0, 0.3);
+  border: 5px solid var(--primary-color);
+  box-shadow: 0 20px 40px var(--shadow-primary-strong);
   transition: all 0.3s ease;
   position: relative;
 }
 
 .profile-photo:hover {
   transform: scale(1.05);
-  box-shadow: 0 25px 50px rgba(255, 102, 0, 0.4);
+  box-shadow: 0 25px 50px var(--shadow-primary-intense);
 }
 
 .photo-placeholder {
   width: 350px;
   height: 350px;
   border-radius: 50%;
-  background: linear-gradient(45deg, #ff6600, #ff9933);
+  background: var(--gradient-primary);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 4rem;
-  color: white;
-  box-shadow: 0 20px 40px rgba(255, 102, 0, 0.3);
+  color: var(--bg-color);
+  box-shadow: 0 20px 40px var(--shadow-primary-strong);
   transition: all 0.3s ease;
 }
 
 .photo-placeholder:hover {
   transform: scale(1.05);
-  box-shadow: 0 25px 50px rgba(255, 102, 0, 0.4);
+  box-shadow: 0 25px 50px var(--shadow-primary-intense);
 }
 
 @keyframes fadeInUp {
@@ -230,7 +344,7 @@ nav a:hover::after {
   font-size: 4rem;
   font-weight: 800;
   margin-bottom: 20px;
-  background: linear-gradient(45deg, #ff6600, #ff9933);
+  background: var(--gradient-primary);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -252,7 +366,7 @@ nav a:hover::after {
   font-size: 1.1rem;
   line-height: 1.8;
   margin-bottom: 40px;
-  color: #4a5568;
+  color: var(--text-secondary);
   text-align: justify;
 }
 
@@ -279,19 +393,19 @@ nav a:hover::after {
 }
 
 .btn-primary {
-  background: linear-gradient(45deg, #ff6600, #ff9933);
-  color: white;
+  background: var(--gradient-primary);
+  color: var(--bg-color);
 }
 
 .btn-secondary {
   background: transparent;
-  color: #ff6600;
-  border: 2px solid #ff6600;
+  color: var(--primary-color);
+  border: 2px solid var(--primary-color);
 }
 
 .btn:hover {
   transform: translateY(-3px);
-  box-shadow: 0 15px 35px rgba(255, 102, 0, 0.3);
+  box-shadow: 0 15px 35px var(--shadow-primary-strong);
 }
 
 .btn::before {
@@ -301,7 +415,7 @@ nav a:hover::after {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  background: var(--gradient-glow);
   transition: left 0.5s;
 }
 
@@ -333,7 +447,7 @@ section {
   transform: translateX(-50%);
   width: 80px;
   height: 4px;
-  background: linear-gradient(45deg, #ff6600, #ff9933);
+  background: var(--gradient-primary);
   border-radius: 2px;
 }
 
@@ -346,16 +460,16 @@ section {
 }
 
 .project-card {
-  background: rgba(255, 255, 255, 0.8);
+  background: var(--card-bg);
   backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 102, 0, 0.2);
+  border: 1px solid var(--card-border);
   border-radius: 20px;
   padding: 30px;
   transition: all 0.3s ease;
   cursor: pointer;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 4px 20px rgba(255, 102, 0, 0.1);
+  box-shadow: 0 4px 20px var(--shadow-primary);
 }
 
 .project-card::before {
@@ -365,7 +479,7 @@ section {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(45deg, rgba(255, 102, 0, 0.05), rgba(255, 153, 51, 0.05));
+  background: var(--gradient-overlay);
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -376,13 +490,13 @@ section {
 
 .project-card:hover {
   transform: translateY(-10px) scale(1.02);
-  box-shadow: 0 20px 50px rgba(255, 102, 0, 0.2);
+  box-shadow: 0 20px 50px var(--shadow-primary-hover);
 }
 
 .project-card h3 {
   font-size: 1.5rem;
   margin-bottom: 15px;
-  color: #ff6600;
+  color: var(--primary-color);
 }
 
 .project-card p {
@@ -397,12 +511,12 @@ section {
 }
 
 .tech-tag {
-  background: rgba(255, 102, 0, 0.1);
-  color: #ff6600;
+  background: var(--tag-bg);
+  color: var(--primary-color);
   padding: 5px 12px;
   border-radius: 15px;
   font-size: 0.9rem;
-  border: 1px solid rgba(255, 102, 0, 0.3);
+  border: 1px solid var(--tag-border);
 }
 
 /* Habilidades */
@@ -416,15 +530,15 @@ section {
 .skill {
   text-align: center;
   padding: 30px;
-  background: rgba(255, 255, 255, 0.6);
+  background: var(--card-bg-secondary);
   border-radius: 20px;
-  border: 1px solid rgba(255, 102, 0, 0.2);
+  border: 1px solid var(--card-border);
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(255, 102, 0, 0.1);
+  box-shadow: 0 4px 15px var(--shadow-primary);
 }
 
 .skill:hover {
-  background: rgba(255, 255, 255, 0.8);
+  background: var(--card-bg-hover);
   transform: translateY(-5px);
   box-shadow: 0 8px 25px rgba(255, 102, 0, 0.15);
 }
@@ -432,7 +546,7 @@ section {
 .skill-icon {
   font-size: 3rem;
   margin-bottom: 20px;
-  background: linear-gradient(45deg, #ff6600, #ff9933);
+  background: var(--gradient-primary);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -440,13 +554,13 @@ section {
 
 /* Footer */
 footer {
-  background: rgba(255, 102, 0, 0.1);
+  background: var(--footer-bg);
   padding: 60px 20px 30px;
   text-align: center;
   backdrop-filter: blur(20px);
   position: relative;
   z-index: 10;
-  border-top: 1px solid rgba(255, 102, 0, 0.2);
+  border-top: 1px solid var(--footer-border);
 }
 
 .social-links {
@@ -459,22 +573,22 @@ footer {
 .social-link {
   width: 50px;
   height: 50px;
-  background: rgba(255, 255, 255, 0.8);
+  background: var(--card-bg);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #ff6600;
+  color: var(--primary-color);
   text-decoration: none;
   transition: all 0.3s ease;
-  border: 1px solid rgba(255, 102, 0, 0.3);
+  border: 1px solid var(--tag-border);
 }
 
 .social-link:hover {
-  background: #ff6600;
-  color: white;
+  background: var(--primary-color);
+  color: var(--bg-color);
   transform: translateY(-3px);
-  box-shadow: 0 10px 25px rgba(255, 102, 0, 0.3);
+  box-shadow: 0 10px 25px var(--shadow-primary-strong);
 }
 
 /* Scroll suave */
@@ -528,10 +642,10 @@ html {
 }
 
 .timeline-content {
-  background: var(--card-bg);
+  background: var(--timeline-bg);
   padding: 2rem;
   border-radius: 15px;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--timeline-border);
 }
 
 .timeline-content h3 {
@@ -552,7 +666,7 @@ html {
 }
 
 .timeline-skill {
-  background: rgba(255, 107, 53, 0.2);
+  background: var(--timeline-skill-bg);
   color: var(--primary-color);
   padding: 0.3rem 0.8rem;
   border-radius: 15px;
@@ -567,7 +681,7 @@ html {
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: var(--modal-overlay);
     backdrop-filter: blur(5px);
 }
 
@@ -575,7 +689,7 @@ html {
     background-color: var(--card-bg);
     margin: 5% auto;
     padding: 3rem;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--card-border);
     border-radius: 20px;
     width: 80%;
     max-width: 800px;
@@ -634,6 +748,7 @@ html {
       margin-left: 40px;
   }
 }
+
 @media (max-width: 768px) {
   .hero h1 {
       font-size: 2.5rem;

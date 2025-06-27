@@ -51,6 +51,76 @@ function handleTitleAnimation() {
 // Event listener para ejecutar en scroll
 window.addEventListener('scroll', handleTitleAnimation);
 
+document.addEventListener('DOMContentLoaded', function() {
+    const header = document.querySelector('header');
+    const nav = document.querySelector('nav');
+    const mainTitle = document.getElementById('mainTitle');
+    
+    // Crear el elemento del nombre que aparecerá en el header
+    const headerTitle = document.createElement('div');
+    headerTitle.className = 'header-title';
+    headerTitle.textContent = 'Cristian Campos';
+    headerTitle.style.opacity = '0';
+    headerTitle.style.transform = 'translateY(-20px)';
+    
+    // Insertar el título al inicio del nav
+    nav.insertBefore(headerTitle, nav.firstChild);
+    
+    // Variables para el control del scroll
+    let isNameVisible = true;
+    let headerExpanded = false;
+    
+    // Función para verificar si el nombre principal está visible
+    function isElementVisible(element) {
+        const rect = element.getBoundingClientRect();
+        return rect.bottom > 0 && rect.top < window.innerHeight;
+    }
+    
+    // Función para expandir el header
+    function expandHeader() {
+        if (!headerExpanded) {
+            header.classList.add('expanded');
+            headerTitle.style.opacity = '1';
+            headerTitle.style.transform = 'translateY(0)';
+            headerExpanded = true;
+        }
+    }
+    
+    // Función para contraer el header
+    function contractHeader() {
+        if (headerExpanded) {
+            header.classList.remove('expanded');
+            headerTitle.style.opacity = '0';
+            headerTitle.style.transform = 'translateY(-20px)';
+            headerExpanded = false;
+        }
+    }
+    
+    // Event listener para el scroll
+    window.addEventListener('scroll', function() {
+        const nameCurrentlyVisible = isElementVisible(mainTitle);
+        
+        // Si el nombre principal no es visible y antes sí lo era
+        if (!nameCurrentlyVisible && isNameVisible) {
+            expandHeader();
+            isNameVisible = false;
+        }
+        // Si el nombre principal es visible y antes no lo era
+        else if (nameCurrentlyVisible && !isNameVisible) {
+            contractHeader();
+            isNameVisible = true;
+        }
+    });
+    
+    // Verificación inicial
+    setTimeout(() => {
+        if (!isElementVisible(mainTitle)) {
+            expandHeader();
+            isNameVisible = false;
+        }
+    }, 100);
+});
+
 // Animación de entrada para las tarjetas
 function observeCards() {
   const cards = document.querySelectorAll('.project-card, .skill');
