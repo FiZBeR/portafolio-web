@@ -13,11 +13,13 @@
     <!-- Header flotante -->
     <header>
         <nav>
+            <!-- <div class="nav-brand" id="navBrand">Cristian Campos</div> -->
             <a href="#inicio">Inicio</a>
             <a href="#experiencia">Experiencia</a>
             <a href="#proyectos">Proyectos</a>
             <a href="#habilidades">Habilidades</a>
             <a href="#contacto">Contacto</a>
+            <!-- <button class="theme-toggle" id="themeToggle">🌙</button> -->
         </nav>
     </header>
 
@@ -25,7 +27,7 @@
     <section id="inicio" class="hero">
         <div class="hero-container">
             <div class="hero-content">
-                <h1>Cristian Campos</h1>
+                <h1 class="nombre" id="mainTitle">Cristian Campos</h1>
                 <p>Desarrollador Frontend - React Developer</p>
                 <div class="hero-intro">
                     <p>¡Hola! Soy un desarrollador apasionado por crear experiencias digitales excepcionales que realmente marquen la diferencia. Con más de un año de experiencia en el desarrollo web, me especializo en transformar ideas innovadoras en soluciones tecnológicas robustas y elegantes.</p>
@@ -104,7 +106,7 @@
     <section id="proyectos">
         <h2 class="section-title">Proyectos Destacados</h2>
         <div class="projects-grid">
-            <div class="project-card">
+            <div class="project-card" onclick="openModal('App de E-commerce')">
                 <h3>App de E-commerce</h3>
                 <p>Plataforma completa de comercio electrónico con panel de administración, pasarela de pagos y sistema de inventario en tiempo real.</p>
                 <div class="tech-stack">
@@ -114,7 +116,7 @@
                     <span class="tech-tag">Stripe</span>
                 </div>
             </div>
-            <div class="project-card">
+            <div class="project-card" onclick="openModal('Dashboard Analytics')">
                 <h3>Dashboard Analytics</h3>
                 <p>Interfaz de análisis de datos con visualizaciones interactivas, métricas en tiempo real y reportes automatizados.</p>
                 <div class="tech-stack">
@@ -124,7 +126,7 @@
                     <span class="tech-tag">PostgreSQL</span>
                 </div>
             </div>
-            <div class="project-card">
+            <div class="project-card" onclick="openModal('App Móvil Fitness')">
                 <h3>App Móvil Fitness</h3>
                 <p>Aplicación de seguimiento de ejercicios con RA, planes personalizados y gamificación para motivar a los usuarios.</p>
                 <div class="tech-stack">
@@ -163,6 +165,14 @@
             </div>
         </div>
     </section>
+
+    <!-- Modal -->
+    <div id="projectModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle"></h2>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer id="contacto">

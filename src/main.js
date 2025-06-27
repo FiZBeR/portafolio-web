@@ -34,6 +34,23 @@ function parallaxEffect() {
   });
 }
 
+// JavaScript para la animación del nombre
+function handleTitleAnimation() {
+    const mainTitle = document.getElementById('mainTitle');
+    const navBrand = document.getElementById('navBrand');
+    const titleRect = mainTitle.getBoundingClientRect();
+    
+    // Cuando el título principal sale de la vista (menos de 100px del top)
+    if (titleRect.top < 100) {
+        navBrand.classList.add('visible');
+    } else {
+        navBrand.classList.remove('visible');
+    }
+}
+
+// Event listener para ejecutar en scroll
+window.addEventListener('scroll', handleTitleAnimation);
+
 // Animación de entrada para las tarjetas
 function observeCards() {
   const cards = document.querySelectorAll('.project-card, .skill');
@@ -118,35 +135,79 @@ function observeTimeline() {
   });
 }
 
+ // Toggle tema oscuro/claro
+ function toggleTheme() {
+    const body = document.body;
+    const themeToggle = document.getElementById('themeToggle');
+    
+    if (body.getAttribute('data-theme') === 'dark') {
+        body.removeAttribute('data-theme');
+        themeToggle.textContent = '🌙';
+    } else {
+        body.setAttribute('data-theme', 'dark');
+        themeToggle.textContent = '☀️';
+    }
+}
+
+
 // Cursor personalizado
-document.addEventListener('mousemove', (e) => {
-  const cursor = document.createElement('div');
-  cursor.style.cssText = `
-      position: fixed;
-      left: ${e.clientX}px;
-      top: ${e.clientY}px;
-      width: 20px;
-      height: 20px;
-      background: radial-gradient(circle, rgba(100,255,218,0.3) 0%, transparent 70%);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 9999;
-      animation: cursorFade 0.5s ease-out forwards;
-  `;
+// document.addEventListener('mousemove', (e) => {
+//   const cursor = document.createElement('div');
+//   cursor.style.cssText = `
+//       position: fixed;
+//       left: ${e.clientX}px;
+//       top: ${e.clientY}px;
+//       width: 20px;
+//       height: 20px;
+//       background: radial-gradient(circle, rgba(100,255,218,0.3) 0%, transparent 70%);
+//       border-radius: 50%;
+//       pointer-events: none;
+//       z-index: 9999;
+//       animation: cursorFade 0.5s ease-out forwards;
+//   `;
   
-  document.body.appendChild(cursor);
+//   document.body.appendChild(cursor);
   
-  setTimeout(() => {
-      cursor.remove();
-  }, 500);
-});
+//   setTimeout(() => {
+//       cursor.remove();
+//   }, 500);
+// });
 
 // CSS para el cursor
-const style = document.createElement('style');
-style.textContent = `
-  @keyframes cursorFade {
-      from { opacity: 1; transform: scale(1); }
-      to { opacity: 0; transform: scale(2); }
-  }
-`;
-document.head.appendChild(style);
+// const style = document.createElement('style');
+// style.textContent = `
+//   @keyframes cursorFade {
+//       from { opacity: 1; transform: scale(1); }
+//       to { opacity: 0; transform: scale(2); }
+//   }
+// `;
+// document.head.appendChild(style);
+
+function openModal(projectTitle) {
+    const modal = document.getElementById('projectModal');
+    const modalTitle = document.getElementById('modalTitle');
+    modalTitle.textContent = projectTitle;
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden'; // Evitar scroll del body
+}
+
+function closeModal() {
+    const modal = document.getElementById('projectModal');
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto'; // Restaurar scroll del body
+}
+
+// Event listeners para cerrar modal
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        closeModal();
+    }
+});
+
+// Cerrar modal clickeando fuera del contenido
+window.onclick = function(event) {
+    const modal = document.getElementById('projectModal');
+    if (event.target === modal) {
+        closeModal();
+    }
+}
